@@ -1,0 +1,9 @@
+body {
+  padding-top: 1.2em;
+  padding-bottom: 1em;
+}
+
+img.draft {
+  opacity: 0.3;
+  filter: alpha(opacity=30); /* For IE8 and earlier */
+}

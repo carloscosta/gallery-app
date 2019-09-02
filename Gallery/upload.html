@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Gallery: Upload page{% endblock title %}
+
+{% block navbar %}
+    <div class="container-fluid">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">
+                    {% if session %}
+                        <span class="oi oi-lock-locked">
+                            &nbsp;<a href="/"><b>Gallery</b></a>
+                        </span>
+                    {% else %}
+                        <span class="oi oi-lock-unlocked">
+                            &nbsp;<a href="/"><b>Gallery</b></a>
+                        </span>
+                    {% endif %}
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Upload</li>
+            </ol>
+        </nav>
+    </div>
+{% endblock navbar %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <form  method="post" action="/upload" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="File1">Image file:</label>
+                    <input type="file" class="form-control-file" name="File1" onchange="readURL(this);">
+                </div>
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" class="form-control form-control-lg" name="Title1" placeholder="write down a description">
+                    <small id="titleHelp" class="form-text text-muted">
+                        Image's title, the image top description (only accepts .jpg files)
+                    </small>
+                </div>
+                <div class="form-group">
+                    <img id="imgTarget" src="..." class="img-fluid" alt="...">
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg">
+                   <span class="oi oi-check"></span>&nbsp;submit
+                </button>
+                <a role="button" class="btn btn-secondary btn-lg" href="/index/?sort_by=date">
+                    <span class="oi oi-home"></span>&nbsp;home
+                </a>
+            </form>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block footer %}
+{% endblock footer %}
+
+{% block footscript %}
+    <script type="text/javascript">
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+    
+                reader.onload = function (e) {
+                    $('#imgTarget').attr('src', e.target.result);
+                };
+    
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+{% endblock footscript %}

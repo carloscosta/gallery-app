@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Gallery: Main page{% endblock title %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination pagination-lg justify-content-center">
+                    {% for pg in range(1, total+1) %}
+                        {% if pg == page %}
+                            <li class="page-item active">
+                                <a class="page-link" href="/index?page={{ pg }}&sort_by=date">
+                                    <b>{{ pg }}</b>
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="page-item">
+                                <a class="page-link" href="/index?page={{ pg }}&sort_by=date">
+                                    <b>{{ pg }}</b>
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md">
+                {% for data in dataset|slice(3) %}
+                    <div class="row">
+                        {% for d in data %}
+                            {% if d.status == "draft" %}
+                                {% if session == True %}
+                                    <a href="{{ d.link }}" data-toggle="lightbox" data-gallery="example-gallery" 
+                                        class="col-sm lightbox-image" data-title="{{ d.title }}" 
+                                        data-footer="{{ d.id }}||{{ d.votes }}||{{ d.status }}">
+                                        <img src="{{ d.link }}" class="img-fluid draft">
+                                    </a>
+                                {% endif %}
+                            {% else %}
+                                <a href="{{ d.link }}" data-toggle="lightbox" data-gallery="example-gallery" 
+                                    class="col-sm lightbox-image" data-title="{{ d.title }}" 
+                                    data-footer="{{ d.id }}||{{ d.votes }}||{{ d.status }}">
+                                    <img src="{{ d.link }}" class="img-fluid">
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+
+{% block footscript %}
+    <script type="text/javascript">
+        $(document).on('click', '[data-toggle="lightbox"]', function(e) {
+            e.preventDefault();
+            $(this).ekkoLightbox({ 
+                onContentLoaded: function() {
+                    let [img_id, votes, vis] = $("div.modal-footer").text().split("||");
+                    console.log('Checking events?', img_id, votes, vis);
+                    if (vis === 'draft') {
+                        {% if session == True %}
+                            vote_button = "<a class='btn btn-success btn-sm' href='/save?img_id=" + img_id + "' role='button'>aprove</a>";
+                            vote_button = vote_button + "<a class='btn btn-danger btn-sm' href='/remove?img_id=" + img_id + "'role='button'>remove</a>";
+                        {% else %}
+                            vote_button = "";
+                        {% endif %}
+                    } else {
+                        {% if session == True %}
+                            vote_button = "<a class='btn btn-danger btn-sm' href='/remove?img_id=" + img_id + "'role='button'>remove</a>";
+                        {% else %}
+                            vote_button = "";
+                        {% endif %}
+                    }
+                    vote_button = vote_button + "<a role='button' class='btn btn-primary btn-sm' href=/star?img_id=" + img_id + ">";
+                    vote_button = vote_button + "<span class='oi oi-star'></span>&nbsp;" + votes + "</a>";
+                    $("div.modal-footer").html(vote_button);
+                },
+            });
+        });
+    </script>
+{% endblock footscript %}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% block head %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="shortcut icon" href="/assets/ico/favicon.png">
+
+        <title>
+            {% block title %} {% endblock title %}
+        </title>
+
+        <!-- Core CSS -->
+        <link href="/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/dist/css/ekko-lightbox.css" rel="stylesheet">
+        <link href="/dist/css/open-iconic-bootstrap.css" rel="stylesheet">
+
+
+        <!-- Custom styles for this template -->
+        <link href="/main.css" rel="stylesheet">
+
+        {% block addhead %} {% endblock addhead %}
+        {% endblock head %}
+    </head>
+
+    <body>
+        {% block navbar %}
+        <div class="container-fluid">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">
+                        {% if session %}
+                            <span class="oi oi-lock-locked"><b>&nbsp;Gallery</b></span>
+                        {% else %}
+                            <span class="oi oi-lock-unlocked"><b>&nbsp;Gallery</b></span>
+                        {% endif %}
+                    </li>
+                </ol>
+            </nav>
+        </div>
+        {% endblock navbar %}
+
+        {% block content %}
+        {% endblock content %}
+
+        {% block footer %}
+        <hr />
+        <footer>
+            <center>
+                {% if session %}
+                    <a role="button" id="login" class="btn btn-primary btn-lg disabled" href="/login/">
+                        <span class="oi oi-account-login"></span>&nbsp;<b>login</b>
+                    </a>
+                {% else %}
+                    <a role="button" id="login" class="btn btn-primary btn-lg" href="/login/">
+                        <span class="oi oi-account-login"></span>&nbsp;<b>login</b>
+                    </a>
+                {% endif %}
+
+                <a role="button" class="btn btn-secondary btn-lg" href="/index/?sort_by=date">
+                    <span class="oi oi-clock"></span>&nbsp;<b>Sort by date</b>
+                </a>
+                <a role="button" class="btn btn-info btn-lg" href="/index/?sort_by=votes">
+                    <span class="oi oi-star"></span>&nbsp;<b>Sort by votes</b>
+                </a>
+
+                <a role="button" id="upload" class="btn btn-success btn-lg" href="/upload">
+                    <span class="oi oi-cloud-upload"></span>&nbsp;<b>upload</b>
+                </a>
+
+                {% if session %}
+                    <a role="button" id="logout" class="btn btn-danger btn-lg" href="/login?logout=1">
+                        <span class="oi oi-account-logout"></span>&nbsp;<b>logout</b>
+                    </a>
+                {% else %}
+                    <a role="button" id="logout" class="btn btn-danger btn-lg disabled" href="/login?logout=1">
+                        <span class="oi oi-account-logout"></span>&nbsp;<b>logout</b>
+                    </a>
+                {% endif %}
+            </center>
+        </footer>
+        {% endblock footer %}
+
+        <!-- Bootstrap core JavaScript -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="/vendor/js/jquery.js"></script>
+        <script src="/vendor/js/bootstrap.min.js"></script>
+        <script src="/vendor/js/ekko-lightbox.min.js"></script>
+
+        {% block footscript %}
+        <script type="text/javascript">
+        </script>
+        {% endblock footscript %}
+    </body>
+</html>

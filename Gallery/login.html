@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Gallery: Login page{% endblock title %}
+
+{% block navbar %}
+<div class="container-fluid">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">
+                {% if session %}
+                   <span class="oi oi-lock-locked">
+                       &nbsp;<a href="/"><b>Gallery</b></a>
+                   </span>
+                {% else %}
+                    <span class="oi oi-lock-unlocked">
+                        &nbsp;<a href="/"><b>Gallery</b></a>
+                    </span>
+                {% endif %}
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Login</li>
+        </ol>
+    </nav>
+</div>
+{% endblock navbar %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <form  method="post" action="/login">
+            <div class="form-group">
+                <label for="login">Login:</label>
+                <input type="text" class="form-control form-control-lg" name="login" aria-describedby="loginHelp" value="admin" readonly>
+                <small id="emailHelp" class="form-text text-muted">Admin's login</small>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control form-control-lg" name="password" placeholder="password" autofocus>
+                <small id="emailHelp" class="form-text text-muted">Admin's password</small>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg">
+               <span class="oi oi-check"></span>&nbsp;submit
+            </button>
+            <a role="button" class="btn btn-secondary btn-lg" href="/index/?sort_by=date">
+               <span class="oi oi-home"></span>&nbsp;home
+            </a>
+        </form>
+    </div>
+</div>
+{% endblock content %}
+
+{% block footer %}
+{% endblock footer %}
+
