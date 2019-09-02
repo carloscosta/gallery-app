@@ -7,6 +7,10 @@ all friend's photos. You (the admin) will be able to approve the photos before
 be visible to everyone. Visitors are able to like photos, sorting the dashboard
 of photos by total of likes or by date taken.
 
+The app follows the Model-View-Controller pattern. Backend and Frontend is
+coded to follow the separation beetween views and models, as the design pattern
+indicates.
+
 ## Backend
 
 The Gallery app uses [Python CherryPy](https://cherrypy.org/) as the controller,
@@ -22,10 +26,6 @@ Web interface was designed using the excellent [Twitter Bootstrap](https://getbo
 plus [Open Iconic](https://useiconic.com/open/) on button's ico, and  
 [Lightbox for Bootstrap](http://ashleydw.github.io/lightbox/) which utilizes Bootstrap's modal 
 plugin to implement a lightbox gallery. 
-
-The app follows the Model-View-Controller pattern. Backend and Frontend is
-coded to follow the separation beetween views and models, as the design pattern
-indicates.
 
 ## Steps to run the app
 
