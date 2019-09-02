@@ -84,8 +84,9 @@ below:
 
 The `run.sh` is the entry point to run the app, should be configure using the
 `run.conf` file as mentioned early. Inside the `Gallery/` directory, all the
-Jinja2 templates are organized. The `base.html` template is the root. The
-`__init__.py` file is where the magic happens. Finally, the `Gallery/assets/`
+Jinja2 templates are organized. The `base.html` template is the root.
+
+The `__init__.py` file is where the magic happens. Finally, the `Gallery/assets/`
 contains the static content (CSS, JS and vendor stuffs) which is served
 statically.
 
